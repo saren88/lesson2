@@ -27,13 +27,14 @@ for score in school_data[3]['scores']:
 
 scores_4a_avg = scores_4a_sum / len(school_data[3]['scores'])
 
-print((scores_1a_avg +
-      scores_2a_avg +
-      scores_3a_avg +
-      scores_4a_avg) /
-      len(school_data))
-print(scores_1a_avg)
-print(scores_2a_avg)
-print(scores_3a_avg)
-print(scores_4a_avg)
 
+print('Average school scores is: ' +
+      str((scores_1a_avg +
+           scores_2a_avg +
+           scores_3a_avg +
+           scores_4a_avg) /
+          len(school_data)) + '.')
+print('Average 1a scores is: ' + str(scores_1a_avg) + '.')
+print('Average 2a scores is: ' + str(scores_2a_avg) + '.')
+print('Average 3a scores is: ' + str(scores_3a_avg) + '.')
+print('Average 4a scores is: ' + str(scores_4a_avg) + '.')
