@@ -6,4 +6,5 @@ def ask_user():
             print('I am happy for you.')
             break
 
+
 ask_user()
