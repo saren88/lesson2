@@ -17,33 +17,18 @@ def greet_user(bot, update):
 
 def planet_constellation(bot, update):
     msg = update.message.text
-    if msg == 'Jupiter':
-        jupiter = ephem.Jupiter(datetime.now())
-        jupiter_constellation = "Planet {}" \
-                                " now in {} " \
-                                "constellation.".format(msg,
-                                                        ephem.constellation(
-                                                            jupiter)
-                                                        )
-        update.message.reply_text(jupiter_constellation)
-    elif msg == 'Mars':
-        mars = ephem.Mars(datetime.now())
-        mars_constellation = "Planet {}" \
-                             " now in {} " \
-                             "constellation.".format(msg,
-                                                     ephem.constellation(
-                                                         mars)
-                                                     )
-        update.message.reply_text(mars_constellation)
-    elif msg == 'Uranus':
-        uranus = ephem.Uranus(datetime.now())
-        uranus_constellation = "Planet {}" \
-                               " now in {} " \
-                               "constellation.".format(msg,
-                                                       ephem.constellation(
-                                                           uranus)
-                                                       )
-        update.message.reply_text(uranus_constellation)
+    if hasattr(ephem, msg.capitalize()):
+        planet = getattr(ephem, msg)(datetime.now())
+        planet_location = "Planet {}" \
+                          " now in {} " \
+                          "constellation.".format(msg,
+                                                  ephem.constellation(
+                                                                     planet)
+                                                  )
+        update.message.reply_text(planet_location)
+    else:
+        name_error = "Please enter valid planet name."
+        update.message.reply_text(name_error)
     logging.info(msg)
 
 
