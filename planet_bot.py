@@ -3,10 +3,11 @@ import logging
 import settings
 import ephem
 from datetime import datetime
-logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
-                    level=logging.INFO,
-                    filename='bot.log'
-                    )
+logging.basicConfig(
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    level=logging.INFO,
+    filename='bot.log'
+)
 
 
 def greet_user(bot, update):
@@ -18,23 +19,19 @@ def greet_user(bot, update):
 def planet_constellation(bot, update):
     msg = update.message.text
     if hasattr(ephem, msg.capitalize()):
-        planet = getattr(ephem, msg)(datetime.now())
-        planet_location = "Planet {}" \
-                          " now in {} " \
-                          "constellation.".format(msg,
-                                                  ephem.constellation(
-                                                                     planet)
-                                                  )
-        update.message.reply_text(planet_location)
-    else:
-        name_error = "Please enter valid planet name."
-        update.message.reply_text(name_error)
+        planet = getattr(ephem, msg.capitalize())(datetime.now())
+        planet_message = "Planet {} now in {} constellation.".format(
+            msg,
+            ephem.constellation(planet)
+        )
+        update.message.reply_text(planet_message)
     logging.info(msg)
 
 
 def main():
-    my_bot = Updater(settings.API_KEY,
-                     request_kwargs=settings.PROXY
+    my_bot = Updater(
+        settings.API_KEY,
+        request_kwargs=settings.PROXY
                      )
     logging.info('Bot launching')
 
